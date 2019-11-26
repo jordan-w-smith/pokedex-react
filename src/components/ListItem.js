@@ -1,17 +1,20 @@
 import React from 'react'
+import './PokemonList.css'
 
 const ListItem = (props) => {
-    const singlePokemon = props.allPokemon.map((pokemon) => {
-        return pokemon
-    });
+
+    function handleClick(event) {
+        props.handlePokemonClick(event)
+    }  
 
     return (
         <>
             {props.allPokemon.map((pokemon) => {
-                return <li>{pokemon.name}</li>
+                return <li onClick={handleClick}>{pokemon.name}</li>
             })}
         </>
     )
+
 }
 
 export default ListItem
