@@ -1,0 +1,18 @@
+label {
+    font-size: 38px;
+}
+
+input {
+    margin-left: 20px;
+    border: 1px solid black;
+    height: 100%;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    width: 250px;
+    top: 0;
+    font-size: 28px;
+}
+
+.search-container {
+    margin-bottom: 8vh;
+}

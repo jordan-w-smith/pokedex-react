@@ -3,14 +3,14 @@ import './PokemonList.css'
 
 const ListItem = (props) => {
 
-    function handleClick(event) {
-        props.handlePokemonClick(event)
+    function handleClick(pokemonName) {
+        props.handlePokemonClick(pokemonName)
     }  
 
     return (
         <>
             {props.allPokemon.map((pokemon) => {
-                return <li onClick={handleClick}>{pokemon.name}</li>
+                return <a href="#"><li onClick={() => handleClick(pokemon.name)}>{pokemon.name.includes(props.searchTerm) ? pokemon.name : ""}</li></a>
             })}
         </>
     )
