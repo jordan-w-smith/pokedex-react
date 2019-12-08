@@ -93,11 +93,13 @@ class PokedexContainer extends React.Component {
             <>
                 <h1>Pokedex</h1>
                 {this.state.pokemon === "" ? "" : <PokemonDetail pokemon={this.state.pokemon}></PokemonDetail>}
-                <MyPokemon 
-                favouritePokemon={this.state.favouritePokemon}
-                deleteFavourite={this.deleteFavourite}
-                handlePokemonClick={this.handlePokemonClick} 
-                ></MyPokemon>
+                {this.state.favouritePokemon.length === 0 ? "" : 
+                    <MyPokemon 
+                    favouritePokemon={this.state.favouritePokemon} 
+                    deleteFavourite={this.deleteFavourite} 
+                    handlePokemonClick={this.handlePokemonClick} ></MyPokemon>
+                }
+
                 <PokemonSearch searchTerm={this.state.searchTerm} handleSearchInput={this.handleSearchInput}></PokemonSearch>
                 <PokemonList 
                 searchTerm={this.state.searchTerm} 

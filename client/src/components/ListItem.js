@@ -15,15 +15,12 @@ const ListItem = (props) => {
         <>
             {props.allPokemon.map((pokemon) => {
                 return (
-                    <>
-                        <div class="list-item">
+                        <div className="list-item">
                             <li
                                 onClick={() => handleClick(pokemon.name)}>{pokemon.name.includes(props.searchTerm) ? pokemon.name : ""}
                             </li>
                             <button className="add-favourite-button" onClick={() => handleFavouriteClick(pokemon)}>Add favourite</button>
                         </div>
-
-                    </>
                 )
             })}
 

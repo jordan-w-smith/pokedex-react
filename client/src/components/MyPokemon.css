@@ -8,7 +8,7 @@
     margin-left: 10px;
     border: 2px solid red;
     padding-top: 2px;
-    padding-bottom: 2px;
+    padding-bottom: 1px;
     margin-bottom: 7px;
 }
 
@@ -22,4 +22,8 @@
 
 li {
     width: 60%;
+}
+.pokeball-image {
+    width: 34px;
+    height: 34px;
 }
