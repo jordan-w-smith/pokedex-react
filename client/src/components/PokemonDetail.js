@@ -23,7 +23,7 @@ const PokemonDetails = ({ pokemon }) => {
                 </p>
             </div>
             <div className="image-container">
-                <img src={pokemon.sprites && pokemon.sprites.front_default} />
+                <img src={pokemon.sprites && pokemon.sprites.front_default} alt={pokemon.name}/>
             </div>
 
             {/* <p>{props.pokemon.types}</p> */}

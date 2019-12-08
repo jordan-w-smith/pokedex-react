@@ -8,7 +8,7 @@ const PokemonSearch = (props) => {
     }
 
     return (
-    <div class="search-container">
+    <div className="search-container">
         <label>Pokemon Search</label> <input type="text" onChange={handleChange}></input>
     </div>
     )

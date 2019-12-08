@@ -10,16 +10,15 @@ class PokedexContainer extends React.Component {
         super();
         this.state = {
             allPokemon: [],
+            favouritePokemon: [],
             pokemon: "",
-            searchTerm: ""
+            searchTerm: "",
         }
         this.handlePokemonClick = this.handlePokemonClick.bind(this)
         this.handleSearchInput = this.handleSearchInput.bind(this)
+        this.addFavourite = this.addFavourite.bind(this)
+        this.deleteFavourite = this.deleteFavourite.bind(this)
     }
-
-
-
-
 
     componentDidMount() {
         fetch('https://pokeapi.co/api/v2/pokemon')
@@ -27,7 +26,15 @@ class PokedexContainer extends React.Component {
             .then(pokemons => this.setState({
                 allPokemon: pokemons.results
             }))
-            .catch(err => console.error)
+            .catch(err => console.error);
+
+        fetch('http://localhost:8080/pokemon')
+
+            .then(res => res.json())
+            .then(favourites => this.setState({
+                favouritePokemon: favourites
+            }))
+            .catch(err => console.error);
     }
 
     handlePokemonClick(selectedPokemonName) {
@@ -38,21 +45,67 @@ class PokedexContainer extends React.Component {
             }))
     }
 
-
     handleSearchInput(event) {
         this.setState({
             searchTerm: event
         })
     }
 
+    addFavourite(pokemon) {
+        console.log(pokemon)
+        fetch('http://localhost:8080/pokemon', {
+            method: "POST",
+            body: JSON.stringify(pokemon),
+            headers: { 'Content-Type': 'application/json'}
+        })
+        .then(res => res.json())
+
+        .then( () => {
+            fetch('http://localhost:8080/pokemon')
+            .then(res => res.json())
+            .then(favourites => this.setState({
+                favouritePokemon: favourites
+            }))
+            .catch(err => console.error);
+                }
+            )
+    }
+
+    deleteFavourite(pokemonId) {
+        console.log(pokemonId)
+        fetch('http://localhost:8080/pokemon/' + pokemonId, {
+            method: "DELETE"
+        })
+        .then(() => {
+
+            fetch('http://localhost:8080/pokemon')
+            .then(res => res.json())
+            .then(favourites => this.setState({
+                favouritePokemon: favourites
+            }))
+            .catch(err => console.error);
+            }
+            )
+    }
+
     render() {
         return (
             <>
-                <h1>Pokedex container</h1>
-                {this.state.pokemon === "" ? "" :<PokemonDetail pokemon={this.state.pokemon}></PokemonDetail>}
-                <MyPokemon></MyPokemon>
+                <h1>Pokedex</h1>
+                {this.state.pokemon === "" ? "" : <PokemonDetail pokemon={this.state.pokemon}></PokemonDetail>}
+                <MyPokemon 
+                favouritePokemon={this.state.favouritePokemon}
+                deleteFavourite={this.deleteFavourite}
+                handlePokemonClick={this.handlePokemonClick} 
+                ></MyPokemon>
                 <PokemonSearch searchTerm={this.state.searchTerm} handleSearchInput={this.handleSearchInput}></PokemonSearch>
-                <PokemonList searchTerm={this.state.searchTerm} handlePokemonClick={this.handlePokemonClick} allPokemon={this.state.allPokemon} />
+                <PokemonList 
+                searchTerm={this.state.searchTerm} 
+                handlePokemonClick={this.handlePokemonClick} 
+                allPokemon={this.state.allPokemon}
+                addFavourite={this.addFavourite}
+                
+                />
             </>
         )
     }
