@@ -6,10 +6,10 @@
 
 <h2> Tech Stack </h2>
 <ul>
-    <li>ReactJS<li>
-    <li>NodeJS<li>
-    <li>ExpressJS<li>
-    <li>MongoDB<li>
+    <li>ReactJS</li>
+    <li>NodeJS</li>
+    <li>ExpressJS</li>
+    <li>MongoDB</li>
 </ul>
 
 <h2>Installation Instructions</h2>
